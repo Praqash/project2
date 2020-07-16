@@ -3,33 +3,25 @@
 <html>
     <head>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-        
+
         <script>
 
 
 
         document.addEventListener('DOMContentLoaded', () => {
+         var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+               socket.on('connect', () => {
+              document.querySelector('#text').onsubmit = () => {
+              const li = document.createElement('li');
+              li.innerHTML = document.querySelector('#task').value;
 
-              // Connect to websocket
-              var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
-              // When connected, configure buttons
-              socket.on('connect', () => {
+                      
+                      let x= document.querySelector('#task').value
 
-                  // Each button should emit a "submit vote" event
-                document.querySelector('#text').onsubmit = () => {
+                        document.querySelector('#task').value = '';
 
-                                        // Create new item for list
-                                        const li = document.createElement('li');
-                                        li.innerHTML = document.querySelector('#task').value;
 
-                                        // Add new item to task list
-                                        document.querySelector('#chats').append(li);
-                                        let x= document.querySelector('#task').value
-                                        // Clear input field
-                                        document.querySelector('#task').value = '';
-
-                                        // Stop form from submitting
 
                           socket.emit('submit', x);
                              return false;
@@ -48,7 +40,7 @@
         </script>
 
 
-        <title>Vote</title>
+        <title>letsChat</title>
     </head>
     <body>
 
