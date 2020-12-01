@@ -9,8 +9,12 @@ app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
 
 @app.route("/")
-def index():
-    return render_template("index.html")
+def home():
+    return render_template('home.html')
+
+@app.route("/chat")   
+def chat():
+    return render_template("chat.html")
 
 @socketio.on("submit")
 def vote(x):

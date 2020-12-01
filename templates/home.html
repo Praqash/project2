@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+
+    <script type="text/javascript" src="../static/script.js"></script>
+        
+    
+    
+  </head>
+  <div>
+  
+  <a id = "chat" class="btn btn-primary" href="{{ url_for('chat') }}">CHAT BOX</a>
+</div>
+  
+<div id="form-box">
+  <form id="task">
+
+
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" id="addFriend" placeholder="Friends Name" aria-label="Friends Name" aria-describedby="button-addon2">
+        <div class="input-group-append">
+          <button  class="btn btn-secondary btn-lg py-0" type="button" id="button-addon2"><svg width="1.8em" height="1.8em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+          </svg> </button>
+        </div>
+        
+      </div>
+      
+
+    <div>
+      <span>Name:</span> <select  type="text" id = "n" name="item-name"  placeholder="Person's name?">
+        <option>Andy</option>
+        <option>Mandy</option>
+        <option>Sandy</option>
+      </select>
+   </div>
+
+   <div>
+      <span>Type:</span> 
+        <select id = "t" name="type" >
+          <option value="" selected disabled hidden> 
+            Select an Option 
+        </option> 
+            <option value="Card">Card</option>
+            <option value="Cash">Cash</option>
+        </select>
+    </div>
+          
+   <div>
+      <span>Item:</span> <input type="text" id = "i" name="item-name" placeholder="What did you spend on?">
+    </div>
+    
+    <div>
+      <span>Date:</span> <input type="date" id="d" name="date">
+    </div>
+    
+    <div>
+      <span>Amount:</span> <input type="number" id="a" name="amount" placeholder="How much?">
+    </div>
+
+  <div>
+      <span>Currency:</span> 
+        <select name="type" id="c">
+          <option value="" selected disabled hidden> 
+            Input Currency
+        </option> 
+            <option value="USD">USD</option>
+            <option value="INR">INR</option>
+            <option value="JPY">JYP</option>
+            <option value="GBP">GBP</option>
+            <option value="EUO">EUO</option>
+            <option value="CAD">CAD</option>
+            <option value="HKD">HKD</option>
+            <option value="ISK"></option>
+            
+        </select>
+    </div>
+    <select name="type" id="exc">
+      <option value="" selected disabled hidden> 
+        Exchange Currency 
+    </option> 
+        <option value="USD">USD</option>
+        <option value="INR">INR</option>
+        <option value="JPY">JYP</option>
+        <option value="GBP">GBP</option>
+        <option value="EUO">EUO</option>
+        <option value="CAD">CAD</option>
+        <option value="HKD">HKD</option>
+        <option value="ISK"></option>
+        
+    </select>
+            <input id="submit" type="submit">
+            
+      </form>
+  </div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  <input type="text" id="myInput" onkeyup="filterByName()" placeholder="Filter by names.." title="Type in a name">
+  
+  <table id="tasks">
+    <tr >
+      
+      <th>Name</th>
+      <th id="type" class="center">Type</th>
+      <th>Item</th>
+      <th id="date">Date</th>
+      <th style="text-align: right" id="amount">Amount</th>
+      <th>Delete</th>
+    </tr>
+    <tr id="if-empty">
+      <td colspan="4"><span>Your added items will show up here!</span></td>
+    </tr>
+  
+  </table>
+</html>
