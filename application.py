@@ -60,6 +60,7 @@ def post_user():
 
     db.session.add(user)
     db.session.commit()
+    flash('Your account has been created! You are now able to log in', 'success')
 
     return render_template('login.html')
 
