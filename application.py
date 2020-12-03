@@ -41,7 +41,7 @@ def register():
     return render_template('register.html')
 
 
-@app.route('/login_user', methods=['POST'])
+@app.route("/login_user", methods=['POST'])
 def login_user():
 
     user = User.query.filter_by(email=request.form['email']).first()
