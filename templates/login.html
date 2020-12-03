@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 84b341167bd3b974642479cf2f1a76179cd63529
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,31 +26,84 @@
     
     
     <div class="tab-content">
+<<<<<<< HEAD
      
+=======
+      <div id="signup">   
+        
+        <form action="post_user" method="post">
+        
+        <div class="top-row">
+          
+          <div class="field-wrap">
+            <label>
+              Userame<span class="req">*</span>
+            </label>
+            <input name = "username" type="text"required autocomplete="off"/>
+          </div>
+        </div>
+
+        <div class="field-wrap">
+          <label>
+            Email Address<span class="req">*</span>
+          </label>
+          <input name = "email" type="email" required autocomplete="off"/>
+        </div>
+        
+        <div class="field-wrap">
+          <label>
+            Set A Password<span class="req">*</span>
+          </label>
+          <input name = "password" type="password" required autocomplete="off"/>
+        </div>
+        
+        <button type="submit" class="button button-block"/>CREATE</button>
+        Already have an account? <a id = "show1" onclick="show1()" href="#" >Log In here.</a>
+        </form>
+
+      </div>
+>>>>>>> 84b341167bd3b974642479cf2f1a76179cd63529
       
       <div id="login">   
        
         
+<<<<<<< HEAD
         <form action="login_user" method="post">
+=======
+        <form action="" method="post">
+>>>>>>> 84b341167bd3b974642479cf2f1a76179cd63529
         
           <div class="field-wrap">
           <label>
             Email Address<span class="req">*</span>
           </label>
+<<<<<<< HEAD
           <input name="email" type="email"required autocomplete="on"/>
+=======
+          <input type="email"required autocomplete="off"/>
+>>>>>>> 84b341167bd3b974642479cf2f1a76179cd63529
         </div>
         
         <div class="field-wrap">
           <label>
             Password<span class="req">*</span>
           </label>
+<<<<<<< HEAD
           <input name = "password" type="password"required autocomplete="off"/>
+=======
+          <input type="password"required autocomplete="off"/>
+>>>>>>> 84b341167bd3b974642479cf2f1a76179cd63529
         </div>
         
         <p class="forgot"><a href="#">Forgot Password?</a></p>
         
+<<<<<<< HEAD
         <button class="button button-block">Log In</button>
         Don't have an account? <a id = "show"  href="{{ url_for('register') }}">Register here.</a>
+=======
+        <button class="button button-block"/>Log In</button>
+        Don't have an account? <a id = "show" onclick="show()" href="#">Register here.</a>
+>>>>>>> 84b341167bd3b974642479cf2f1a76179cd63529
         </form>
 
       </div>

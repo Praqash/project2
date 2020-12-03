@@ -10,7 +10,6 @@ app.debug = True
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-app.debug = True
 db = SQLAlchemy(app)
 socketio = SocketIO(app)
 
