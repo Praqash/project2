@@ -15,7 +15,22 @@ document.addEventListener('DOMContentLoaded', function() {
   return false;
     }
   });
-  
+
+  document.getElementById("show1").onclick = show1();
+  function show1() {
+  let a = document.getElementById("signup")
+  let b = document.getElementById("login")
+  a.style.display = "none";
+  b.style.display = "block";
+  }
+
+  document.getElementById("show").onclick = show();
+    function show() {
+    let a = document.getElementById("signup")
+    let b = document.getElementById("login")
+    a.style.display = "block";
+    b.style.display = "none";
+    }
   // Funtion to add row in table
     function addRow(tableID) {
     // Get a reference to the table
