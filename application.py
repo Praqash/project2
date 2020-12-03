@@ -1,7 +1,7 @@
 import os
 
 
-from flask import Flask, jsonify, render_template, request, url_for
+from flask import Flask, jsonify, render_template, request, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 import requests
 from flask_socketio import SocketIO, emit
