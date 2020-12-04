@@ -14,11 +14,12 @@
     
     
   </head>
-
+<div>
   {% if current_user.is_authenticated %}
- <h1> Hi {{ current_user.username}}! <h1>
+ <h1>Hi<h1> 
+ <h1>{{ current_user.username}}!<h1>
   {% endif %}
-
+</div>
   <div>
   
   <a id = "chat" class="btn btn-primary" href="{{ url_for('chat') }}">CHAT BOX</a>
