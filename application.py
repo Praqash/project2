@@ -1,20 +1,31 @@
 import os
 
 
-from flask import Flask, jsonify, render_template, request, url_for, flash
+from flask import Flask, jsonify, render_template, request, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager, login_user, UserMixin
 import requests
+from flask_session import Session
+from sqlalchemy.orm import scoped_session, sessionmaker
 from flask_socketio import SocketIO, emit
 app = Flask(__name__)
-app.debug = True
-app.config['SESSION_TYPE'] = 'filesystem'
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
+db.init_app(app)
 socketio = SocketIO(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 
-class User(db.Model):
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+
+
+class User(db.Model,  UserMixin):
     __tablename__ = "User"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
@@ -40,11 +51,12 @@ def register():
     return render_template('register.html')
 
 
-@app.route("/login_user", methods=['POST'])
-def login_user():
+@app.route("/loginuser", methods=['POST'])
+def loginuser():
 
     user = User.query.filter_by(email=request.form['email']).first()
     if (user.password == request.form['password']):
+        login_user(user)
 
         return render_template('home.html')
 
@@ -60,18 +72,18 @@ def post_user():
 
     db.session.add(user)
     db.session.commit()
-    flash('Your account has been created! You are now able to log in', 'success')
 
     return render_template('login.html')
 
 
-@app.route("/chat")
+@app.route("/chat", methods=['GET', 'POST'])
 def chat():
     return render_template("chat.html")
 
 
 @socketio.on("submit")
 def vote(x):
+
     emit("announce vote", x, broadcast=True)
 
 
