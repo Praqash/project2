@@ -18,8 +18,7 @@
 
 
 
-                      let x= document.querySelector(('#task').value)
-                      
+                      let x= document.querySelector('#task').value
 
                         document.querySelector('#task').value = '';
 
@@ -34,7 +33,7 @@
 
               socket.on('announce vote', x => {
                   const li = document.createElement('li');
-                   li.innerHTML = (x);
+                   li.innerHTML = x;
                   document.querySelector('#chats').append(li);
               });
           });
