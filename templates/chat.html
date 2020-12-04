@@ -18,7 +18,7 @@
 
 
 
-                      let x = (document.querySelector('#task').value)
+                      let x= document.querySelector('#task').value
 
                         document.querySelector('#task').value = '';
 
@@ -33,7 +33,7 @@
 
               socket.on('announce vote', x => {
                   const li = document.createElement('li');
-                   li.innerHTML =  x;
+                   li.innerHTML = x;
                   document.querySelector('#chats').append(li);
               });
           });
@@ -59,7 +59,6 @@ padding: 40px;
        <ul       style="font-size:50px" style = "font-family:courier" class="text-center well" id="chats"></ul>
        <form   id="text">
       <div style="padding-top: 5px;" class="text-center well"></div>
-          <input type="text" value={{current_user.username}}></input>
           <input    style = "height:80px" style = "font-family:courier"   id="task" type="text" class="message form-control text-center well" placeholder="Comment"></input>
           <div style="padding-top: 5px;"></div>
           <button style = "height:80px" type="submit" class="btn btn-success btn-block text-center well"><span class="glyphicon glyphicon-send"></span> Send</button>

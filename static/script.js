@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let newCell4  = newRow.insertCell(4);
     
     let newCell5  = newRow.insertCell(5);
-    newCell5.innerHTML = `<a id="btn" name="btn" onclick= "deleteRow(this)" > Delete </a>`;
+    newCell5.innerHTML = `<div id="btn" type = "button" class = "btn btn-secondary" name="btn" onclick= "deleteRow(this)" > Delete </div>`;
     
     // Append a text node to the cell
     let newText0  = document.createTextNode(document.querySelector('#n').value);
