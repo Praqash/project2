@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
       option.text = document.querySelector("#addFriend").value;
       x.add(option);
     }
-    
+   count = 0;
     // Select the submit button and input to be used later
     document.querySelector('#task').onsubmit = () => {
   
@@ -14,11 +14,22 @@ document.addEventListener('DOMContentLoaded', function() {
       
   return false;
     }
+     
   });
-
+  function Person(count, T0, T1, T2, T3, Exchange) {
+    var persons = {};
+    persons[count] = {id: count, Name: T0, Type: T1, Item: T2, Date: T3, Amount: Exchange};
+    localStorage[count] = JSON.stringify(persons);
+    console.log(localStorage.getItem(count));
+    x = localStorage.getItem(count);
+    rowValue = JSON.parse(x);
+    console.log(rowValue);
+    }
   
   // Funtion to add row in table
-    function addRow(tableID) {
+    function addRow(tableID, x) {
+    
+    rowValue = JSON.parse(x);
     // Get a reference to the table
     let tableRef = document.getElementById(tableID);
   
@@ -37,11 +48,9 @@ document.addEventListener('DOMContentLoaded', function() {
     newCell5.innerHTML = `<a id="btn" name="btn" type = "button" class = "btn btn-secondary" onclick= "deleteRow(this)" > Delete </a>`;
     
     // Append a text node to the cell
-    localStorage.setItem("x" , document.querySelector('#n').value);
-    let newText0  = document.createTextNode(localStorage.getItem("x"));
     
+    let newText0  = document.createTextNode(document.querySelector('#n').value);
     newCell0.appendChild(newText0);
-    
     let newText1  = document.createTextNode(document.querySelector('#t').value);
     newCell1.appendChild(newText1);
     let newText2  = document.createTextNode(document.querySelector('#i').value);
@@ -73,22 +82,27 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if currency is valid:
         result = data.rates[to]
         console.log(result)
+        
+        
+        Exchange = (document.querySelector('#a').value)*(result);
         let newText4  = document.createTextNode((document.querySelector('#a').value)*(result));
         newCell4.appendChild(newText4);
           });
         }
       function deleteRow(r) {
     let i = r.parentNode.parentNode.rowIndex;
+    
     document.getElementById('tasks').deleteRow(i);
   }
+  
   function validationCheck()
   
   {
-    let T0  = document.querySelector('#n').value;
-    let T1  = document.querySelector('#t').value;
-    let T2  = document.querySelector('#i').value;
-    let T3  = document.querySelector('#d').value;
-    let T4  = document.querySelector('#a').value;
+    var T0  = document.querySelector('#n').value;
+    var T1  = document.querySelector('#t').value;
+    var T2  = document.querySelector('#i').value;
+    var T3  = document.querySelector('#d').value;
+    var T4  = document.querySelector('#a').value;
     let T5  = document.querySelector('#c').value;
     let T6  = document.querySelector('#exc').value;
     if (T0 == 0 || T1 == 0 || T2 == 0 || T3 == 0 || T4 == 0 || T5 == 0 || T6 == 0 )
@@ -99,7 +113,13 @@ document.addEventListener('DOMContentLoaded', function() {
      else
      
   {
-  addRow('tasks');
+    
+  
+  
+  addRow('tasks', localStorage.getItem(count));
+  count = count+1; 
+  Person(count, T0,T1,T2,T3,Exchange);
+  
   }
   }
   function filterByName() {
