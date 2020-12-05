@@ -16,21 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  document.getElementById("show1").onclick = show1();
-  function show1() {
-  let a = document.getElementById("signup")
-  let b = document.getElementById("login")
-  a.style.display = "none";
-  b.style.display = "block";
-  }
-
-  document.getElementById("show").onclick = show();
-    function show() {
-    let a = document.getElementById("signup")
-    let b = document.getElementById("login")
-    a.style.display = "block";
-    b.style.display = "none";
-    }
+  
   // Funtion to add row in table
     function addRow(tableID) {
     // Get a reference to the table
@@ -48,11 +34,14 @@ document.addEventListener('DOMContentLoaded', function() {
     let newCell4  = newRow.insertCell(4);
     
     let newCell5  = newRow.insertCell(5);
-    newCell5.innerHTML = `<div id="btn" type = "button" class = "btn btn-secondary" name="btn" onclick= "deleteRow(this)" > Delete </div>`;
+    newCell5.innerHTML = `<a id="btn" name="btn" type = "button" class = "btn btn-secondary" onclick= "deleteRow(this)" > Delete </a>`;
     
     // Append a text node to the cell
-    let newText0  = document.createTextNode(document.querySelector('#n').value);
+    localStorage.setItem("x" , document.querySelector('#n').value);
+    let newText0  = document.createTextNode(localStorage.getItem("x"));
+    
     newCell0.appendChild(newText0);
+    
     let newText1  = document.createTextNode(document.querySelector('#t').value);
     newCell1.appendChild(newText1);
     let newText2  = document.createTextNode(document.querySelector('#i').value);

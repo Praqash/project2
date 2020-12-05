@@ -1,9 +1,9 @@
 import os
 
 
-from flask import Flask, jsonify, render_template, request, url_for, flash, session
+from flask import Flask, jsonify, render_template, request, url_for, flash, session, redirect
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, login_user, UserMixin
+from flask_login import LoginManager, login_user, UserMixin, login_required
 import requests
 from flask_session import Session
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -46,18 +46,23 @@ def login():
     return render_template('login.html')
 
 
+@app.route("/home")
+@login_required
+def home():
+    return render_template('home.html')
+
+
 @app.route("/register")
 def register():
     return render_template('register.html')
 
 
-@app.route("/loginuser", methods=['POST'])
-def loginuser():
+@app.route("/loginUser", methods=['POST'])
+def loginUser():
 
     user = User.query.filter_by(email=request.form['email']).first()
     if (user.password == request.form['password']):
         login_user(user)
-
         return render_template('home.html')
 
     else:
@@ -65,7 +70,7 @@ def loginuser():
         return render_template('login.html', title='Login')
 
 
-@app.route('/post_user', methods=['POST'])
+@ app.route('/post_user', methods=['POST'])
 def post_user():
     user = User(request.form['username'],
                 request.form['email'], request.form['password'])
@@ -76,12 +81,13 @@ def post_user():
     return render_template('login.html')
 
 
-@app.route("/chat", methods=['GET', 'POST'])
+@ app.route("/chat", methods=['GET', 'POST'])
+@login_required
 def chat():
     return render_template("chat.html")
 
 
-@socketio.on("submit")
+@ socketio.on("submit")
 def vote(x):
 
     emit("announce vote", x, broadcast=True)
