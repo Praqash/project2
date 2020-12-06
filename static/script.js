@@ -1,5 +1,16 @@
 // Wait for page to load
 document.addEventListener('DOMContentLoaded', function() {
+  
+var count = localStorage.length;
+
+console.log(count);
+if (count)
+for(i=0 ; i< count ; i ++)
+{
+buildTable('tasks', count);
+}
+else
+
     document.querySelector('#button-addon2').onclick = () => {
       let x = document.getElementById("n");
       let option = document.createElement("option");
@@ -57,45 +68,50 @@ document.addEventListener('DOMContentLoaded', function() {
     var persons = {};
     persons[count] = {id: count, Name: T0, Type: T1, Item: T2, Date: T3, Amount: curr};
     localStorage[count] = JSON.stringify(persons);
-    console.log(localStorage.getItem(count));
+    t = JSON.parse(localStorage.getItem(count))
+    
     
     }
     )};
   
   // Funtion to add row in table
-    function addRow(tableID) {
+    
     // Get a reference to the table
     
     
-    let tableRef = document.getElementById(tableID);
-  
-    // Insert a row in the table at row index 0
-    let newRow   = tableRef.insertRow();
+    function addRow(tableID) {
+      // Get a reference to the table
+      
+      
+      let tableRef = document.getElementById(tableID);
     
-    // Insert a cell in the row at index 0
-    
-    let newCell0  = newRow.insertCell(0);
-    let newCell1  = newRow.insertCell(1);
-    let newCell2  = newRow.insertCell(2);
-    let newCell3  = newRow.insertCell(3);
-    let newCell4  = newRow.insertCell(4);
-    
-    let newCell5  = newRow.insertCell(5);
-    newCell5.innerHTML = `<a id="btn" name="btn" type = "button" class = "btn btn-secondary" onclick= "deleteRow(this)" > Delete </a>`;
-    
-    // Append a text node to the cell
-    
-    let newText0  = document.createTextNode(document.querySelector('#n').value);
-    newCell0.appendChild(newText0);
-    let newText1  = document.createTextNode(document.querySelector('#t').value);
-    newCell1.appendChild(newText1);
-    let newText2  = document.createTextNode(document.querySelector('#i').value);
-    newCell2.appendChild(newText2);
-    let newText3  = document.createTextNode(document.querySelector('#d').value);
-    newCell3.appendChild(newText3);
-    
-    currencyExchange(newCell4);
-  }
+      // Insert a row in the table at row index 0
+      let newRow   = tableRef.insertRow();
+      
+      // Insert a cell in the row at index 0
+      
+      let newCell0  = newRow.insertCell(0);
+      let newCell1  = newRow.insertCell(1);
+      let newCell2  = newRow.insertCell(2);
+      let newCell3  = newRow.insertCell(3);
+      let newCell4  = newRow.insertCell(4);
+      
+      let newCell5  = newRow.insertCell(5);
+      newCell5.innerHTML = `<a id="btn" name="btn" type = "button" class = "btn btn-secondary" onclick= "deleteRow(this)" > Delete </a>`;
+      
+      // Append a text node to the cell
+      
+      let newText0  = document.createTextNode(document.querySelector('#n').value);
+      newCell0.appendChild(newText0);
+      let newText1  = document.createTextNode(document.querySelector('#t').value);
+      newCell1.appendChild(newText1);
+      let newText2  = document.createTextNode(document.querySelector('#i').value);
+      newCell2.appendChild(newText2);
+      let newText3  = document.createTextNode(document.querySelector('#d').value);
+      newCell3.appendChild(newText3);
+      
+      currencyExchange(newCell4);
+    }
   // Function to change any curruncey to USD  
   function currencyExchange(newCell4) {
     
@@ -125,15 +141,21 @@ document.addEventListener('DOMContentLoaded', function() {
         newCell4.appendChild(newText4);
           });
         }
-      function deleteRow(r) {
-    let i = r.parentNode.parentNode.rowIndex;
+      function deleteRow() {
+
+        
     
-    document.getElementById('tasks').deleteRow(i);
+    
+    
+    window.localStorage.removeItem(localStorage.key(this));
+    location.reload();
   }
   
   function validationCheck()
   
   {
+    var count = localStorage.length;
+
     var T0  = document.querySelector('#n').value;
     var T1  = document.querySelector('#t').value;
     var T2  = document.querySelector('#i').value;
@@ -152,9 +174,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
   
   
-  addRow('tasks');
-  count = count+1;
+  
+  
   Person(count, T0,T1,T2,T3,T4,T5,T6);
+  addRow('tasks');
   
   }
   }
@@ -176,4 +199,29 @@ document.addEventListener('DOMContentLoaded', function() {
       }       
     }
   }
+  function buildTable(tableId, count) {
+  let tableRef = document.getElementById(tableId);
   
+    // Insert a row in the table at row index 0
+    let newRow   = tableRef.insertRow();
+    
+    // Insert a cell in the row at index 0
+    
+    let newCell0  = newRow.insertCell(0);
+    newCell0.innerHTML = JSON.parse(localStorage.getItem('key'));
+    let newCell1  = newRow.insertCell(1);
+    newCell1.innerHTML = JSON.parse(localStorage.getItem('key'))
+    let newCell2  = newRow.insertCell(2);
+    newCell2.innerHTML = JSON.parse(localStorage.getItem('key'))
+    let newCell3  = newRow.insertCell(3);
+    newCell3.innerHTML = JSON.parse(localStorage.getItem('key'))
+    let newCell4  = newRow.insertCell(4);
+    newCell4.innerHTML = JSON.parse(localStorage.getItem('key'))
+    
+    let newCell5  = newRow.insertCell(5);
+    newCell5.innerHTML = `<a id="btn" name="btn" type = "button" class = "btn btn-secondary" onclick= "deleteRow()" > Delete </a>`;
+    
+    // Append a text node to the cell
+    
+    
+  }
