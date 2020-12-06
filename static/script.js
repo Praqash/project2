@@ -16,13 +16,51 @@ document.addEventListener('DOMContentLoaded', function() {
     }
      
   });
-  function Person(count, T0, T1, T2, T3, T4) {
+  function Person(count, T0, T1, T2, T3, T4, T5, T6) {
+
+
+
+
+
+    let from = T5
+    let to = T6
+    
+    
+    
+    // Send a GET request to the URL
+    fetch('https://api.exchangeratesapi.io/latest?'+'base=' + from)
+    // Put response into json form
+    
+    .then(response => response.json())
+    
+    .then(data => {
+        // Get currency from user input and convert to upper case
+        // Get rate from data
+        // Check if currency is valid:
+        result = data.rates[to]
+        console.log(result)
+        
+        
+        
+        let curr  = (T4*(result));
+
+
+
+
+
+
+
+
+
+
+
     var persons = {};
-    persons[count] = {id: count, Name: T0, Type: T1, Item: T2, Date: T3, Amount: T4};
+    persons[count] = {id: count, Name: T0, Type: T1, Item: T2, Date: T3, Amount: curr};
     localStorage[count] = JSON.stringify(persons);
     console.log(localStorage.getItem(count));
     
     }
+    )};
   
   // Funtion to add row in table
     function addRow(tableID) {
@@ -116,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   addRow('tasks');
   count = count+1;
-  Person(count, T0,T1,T2,T3,T4);
+  Person(count, T0,T1,T2,T3,T4,T5,T6);
   
   }
   }
