@@ -16,21 +16,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
      
   });
-  function Person(count, T0, T1, T2, T3, Exchange) {
+  function Person(count, T0, T1, T2, T3, T4) {
     var persons = {};
-    persons[count] = {id: count, Name: T0, Type: T1, Item: T2, Date: T3, Amount: Exchange};
+    persons[count] = {id: count, Name: T0, Type: T1, Item: T2, Date: T3, Amount: T4};
     localStorage[count] = JSON.stringify(persons);
     console.log(localStorage.getItem(count));
-    x = localStorage.getItem(count);
-    rowValue = JSON.parse(x);
-    console.log(rowValue);
+    
     }
   
   // Funtion to add row in table
-    function addRow(tableID, x) {
-    
-    rowValue = JSON.parse(x);
+    function addRow(tableID) {
     // Get a reference to the table
+    
+    
     let tableRef = document.getElementById(tableID);
   
     // Insert a row in the table at row index 0
@@ -84,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(result)
         
         
-        Exchange = (document.querySelector('#a').value)*(result);
+        
         let newText4  = document.createTextNode((document.querySelector('#a').value)*(result));
         newCell4.appendChild(newText4);
           });
@@ -116,9 +114,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
   
   
-  addRow('tasks', localStorage.getItem(count));
-  count = count+1; 
-  Person(count, T0,T1,T2,T3,Exchange);
+  addRow('tasks');
+  count = count+1;
+  Person(count, T0,T1,T2,T3,T4);
   
   }
   }
