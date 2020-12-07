@@ -1,38 +1,32 @@
-// Wait for page to load
+if (!localStorage.getItem('counter'))
+localStorage.setItem('counter', 0);
 document.addEventListener('DOMContentLoaded', function() {
-  
-var count = localStorage.length;
-
-console.log(count);
-if (count)
-for(i=0 ; i< count ; i ++)
-{
-buildTable('tasks', count);
-}
-else
-
-    document.querySelector('#button-addon2').onclick = () => {
+  buildTable('tasks');
+document.querySelector('#button-addon2').onclick = () => {
       let x = document.getElementById("n");
       let option = document.createElement("option");
       option.text = document.querySelector("#addFriend").value;
       x.add(option);
     }
-   count = 0;
+   
     // Select the submit button and input to be used later
     document.querySelector('#task').onsubmit = () => {
   
-  validationCheck();
-      
-  return false;
-    }
+     validationCheck() ;
      
-  });
-  function Person(count, T0, T1, T2, T3, T4, T5, T6) {
+     return false;
+     
+     
 
+    }
+    
+    
 
+});
+  
+ 
 
-
-
+  function Person(T0, T1, T2, T3, T4, T5, T6) {
     let from = T5
     let to = T6
     
@@ -54,26 +48,34 @@ else
         
         
         let curr  = (T4*(result));
+        var persons = {};
+        
+       let counter=  localStorage.getItem('counter');
+       counter++;
+        persons[counter] = {id: counter, Name: T0, Type: T1, Item: T2, Date: T3, Amount: curr};
+        localStorage[counter] = JSON.stringify(persons);
+       
+      
+        localStorage.setItem('counter', counter);
 
-
-
-
-
-
-
-
-
-
-
-    var persons = {};
-    persons[count] = {id: count, Name: T0, Type: T1, Item: T2, Date: T3, Amount: curr};
-    localStorage[count] = JSON.stringify(persons);
-    t = JSON.parse(localStorage.getItem(count))
-    
-    
-    }
+                      // Update counter
+                      
+                      
+      location.reload();
+        
+        
+        
+       }
     )};
+    
+
+
+
   
+  
+  
+
+    
   // Funtion to add row in table
     
     // Get a reference to the table
@@ -97,7 +99,7 @@ else
       let newCell4  = newRow.insertCell(4);
       
       let newCell5  = newRow.insertCell(5);
-      newCell5.innerHTML = `<a id="btn" name="btn" type = "button" class = "btn btn-secondary" onclick= "deleteRow(this)" > Delete </a>`;
+      newCell5.innerHTML = `<a id="btn" name="btn" type = "button" class = "btn btn-secondary" onclick= "deleteRow(${i})" > Delete </a>`;
       
       // Append a text node to the cell
       
@@ -111,6 +113,7 @@ else
       newCell3.appendChild(newText3);
       
       currencyExchange(newCell4);
+      
     }
   // Function to change any curruncey to USD  
   function currencyExchange(newCell4) {
@@ -139,23 +142,29 @@ else
         
         let newText4  = document.createTextNode((document.querySelector('#a').value)*(result));
         newCell4.appendChild(newText4);
-          });
-        }
-      function deleteRow() {
-
         
-    
-    
-    
-    window.localStorage.removeItem(localStorage.key(this));
-    location.reload();
+          });
+          
+        }
+      function deleteRow(a) {
+
+        var len = localStorage.length;
+        if (len)    
+            
+          
+        
+        
+        localStorage.removeItem(a);
+     
+        location.reload();
+        
+        
   }
   
   function validationCheck()
   
   {
-    var count = localStorage.length;
-
+    
     var T0  = document.querySelector('#n').value;
     var T1  = document.querySelector('#t').value;
     var T2  = document.querySelector('#i').value;
@@ -164,23 +173,21 @@ else
     let T5  = document.querySelector('#c').value;
     let T6  = document.querySelector('#exc').value;
     if (T0 == 0 || T1 == 0 || T2 == 0 || T3 == 0 || T4 == 0 || T5 == 0 || T6 == 0 )
-  
-  {
+    {
     alert ("All fields are mandatory!")
-  }
-     else
-     
-  {
+    return false;
+    }
     
+    else {
   
-  
-  
-  
-  Person(count, T0,T1,T2,T3,T4,T5,T6);
-  addRow('tasks');
-  
+      
+      
+      Person( T0,T1,T2,T3,T4,T5,T6); 
+     
+   
   }
-  }
+}
+  
   function filterByName() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("myInput");
@@ -199,29 +206,42 @@ else
       }       
     }
   }
-  function buildTable(tableId, count) {
+  function buildTable(tableId) {
   let tableRef = document.getElementById(tableId);
+  var len =   localStorage.getItem('counter');
+
+console.log(len);
+if (len>0)
+
+for(i=1 ; i <= len ; i ++)
+{
+    
+    
   
-    // Insert a row in the table at row index 0
+
+val = JSON.parse(localStorage.getItem(i, 'value'));
+
+
+
+
+
     let newRow   = tableRef.insertRow();
-    
-    // Insert a cell in the row at index 0
-    
     let newCell0  = newRow.insertCell(0);
-    newCell0.innerHTML = JSON.parse(localStorage.getItem('key'));
+    newCell0.innerHTML = val[i].Name;
     let newCell1  = newRow.insertCell(1);
-    newCell1.innerHTML = JSON.parse(localStorage.getItem('key'))
+    newCell1.innerHTML = val[i].Type;
     let newCell2  = newRow.insertCell(2);
-    newCell2.innerHTML = JSON.parse(localStorage.getItem('key'))
+    newCell2.innerHTML = val[i].Item;
     let newCell3  = newRow.insertCell(3);
-    newCell3.innerHTML = JSON.parse(localStorage.getItem('key'))
+    newCell3.innerHTML = val[i].Date;
     let newCell4  = newRow.insertCell(4);
-    newCell4.innerHTML = JSON.parse(localStorage.getItem('key'))
+    newCell4.innerHTML = val[i].Amount;
     
     let newCell5  = newRow.insertCell(5);
-    newCell5.innerHTML = `<a id="btn" name="btn" type = "button" class = "btn btn-secondary" onclick= "deleteRow()" > Delete </a>`;
+    newCell5.innerHTML = `<a id="btn" name="btn"  type = "button" class = "btn btn-secondary" onclick= "deleteRow()" > Delete </a>`;
     
     // Append a text node to the cell
     
-    
+
+  }
   }
