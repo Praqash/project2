@@ -1,7 +1,33 @@
 if (!localStorage.getItem('counter'))
 localStorage.setItem('counter', 0);
 document.addEventListener('DOMContentLoaded', function() {
-  buildTable('tasks');
+ 
+  var len =   localStorage.getItem('counter');
+
+  
+
+  console.log(len);
+  if (len>0)
+  
+  for(i=0 ; i <= len ; i ++)
+  {
+      
+      
+  key =   localStorage.key(i);
+  
+  console.log(key)
+  
+  val2 = JSON.parse(localStorage.getItem(key, 'value'));
+  {
+  if (key !== NaN && key !== null && key !== "counter" && val2!=null )
+  buildTable('tasks',val2,key)
+  }
+}
+
+
+  
+
+
 document.querySelector('#button-addon2').onclick = () => {
       let x = document.getElementById("n");
       let option = document.createElement("option");
@@ -99,7 +125,7 @@ document.querySelector('#button-addon2').onclick = () => {
       let newCell4  = newRow.insertCell(4);
       
       let newCell5  = newRow.insertCell(5);
-      newCell5.innerHTML = `<a id="btn" name="btn" type = "button" class = "btn btn-secondary" onclick= "deleteRow(${i})" > Delete </a>`;
+      newCell5.innerHTML = `<a id="btn" name="btn" type = "button" class = "btn btn-secondary" onclick= "deleteRow(${value2[key].id})" > Delete </a>`;
       
       // Append a text node to the cell
       
@@ -148,14 +174,13 @@ document.querySelector('#button-addon2').onclick = () => {
         }
       function deleteRow(a) {
 
-        var len = localStorage.length;
-        if (len)    
-            
-          
+      var len = localStorage.length;
         
-        
-        localStorage.removeItem(a);
-     
+        if (len>=0)    
+        window.localStorage.removeItem(a);
+        let counter=  localStorage.getItem('counter');
+        counter--;
+        localStorage.setItem('counter', counter);
         location.reload();
         
         
@@ -206,42 +231,25 @@ document.querySelector('#button-addon2').onclick = () => {
       }       
     }
   }
-  function buildTable(tableId) {
+  function buildTable(tableId,val2,key) {
   let tableRef = document.getElementById(tableId);
-  var len =   localStorage.getItem('counter');
-
-console.log(len);
-if (len>0)
-
-for(i=1 ; i <= len ; i ++)
-{
-    
-    
-  
-
-val = JSON.parse(localStorage.getItem(i, 'value'));
-
-
-
-
-
-    let newRow   = tableRef.insertRow();
+  value2 = val2;
+  let newRow   = tableRef.insertRow();
     let newCell0  = newRow.insertCell(0);
-    newCell0.innerHTML = val[i].Name;
+    newCell0.innerHTML = value2[key].Name;
     let newCell1  = newRow.insertCell(1);
-    newCell1.innerHTML = val[i].Type;
+    newCell1.innerHTML = value2[key].Type;
     let newCell2  = newRow.insertCell(2);
-    newCell2.innerHTML = val[i].Item;
+    newCell2.innerHTML = value2[key].Item;
     let newCell3  = newRow.insertCell(3);
-    newCell3.innerHTML = val[i].Date;
+    newCell3.innerHTML = value2[key].Date;
     let newCell4  = newRow.insertCell(4);
-    newCell4.innerHTML = val[i].Amount;
+    newCell4.innerHTML = value2[key].Amount;
     
     let newCell5  = newRow.insertCell(5);
-    newCell5.innerHTML = `<a id="btn" name="btn"  type = "button" class = "btn btn-secondary" onclick= "deleteRow()" > Delete </a>`;
+    newCell5.innerHTML = `<a id="btn" name="btn"  type = "button" class = "btn btn-secondary" onclick= "deleteRow(${value2[key].id})" > Delete </a>`;
     
     // Append a text node to the cell
-    
-
-  }
-  }
+    }
+  
+  
