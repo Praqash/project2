@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   
   if (len>0)
-  
+  {
   for(i=0 ; i <= len ; i ++)
   {
       
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     newCell5.innerHTML = `<a id="btn" name="btn"  type = "button" class = "btn btn-secondary" onclick= "deleterow(${value2[key].id}); deleteRow(this);" > Delete </a>`;
   }
 }
-
+  }
 document.querySelector('#button-addon2').onclick = () => {
       let x = document.getElementById("n");
       let option = document.createElement("option");
