@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
     newCell4.innerHTML = value2[key].Amount;
     
     let newCell5  = newRow.insertCell(5);
-    newCell5.innerHTML = `<a id="btn" name="btn"  type = "button" class = "btn btn-secondary" onclick= "deleterow(${value2[key].id}); deleteRow(this);" > Delete </a>`;
+    newCell5.innerHTML = `<a id="btn" name="btn"  type = "button" class = "btn btn-light" onclick= "deleterow(${value2[key].id}); deleteRow(this);" > Delete </a>`;
   }
 }
   }
@@ -134,7 +134,7 @@ function deleteRow(r) {
         let newText4  = document.createTextNode(curr);
         newCell4.appendChild(newText4);
         let newCell5  = newRow.insertCell(5);
-        newCell5.innerHTML = `<a id="btn" name="btn" type = "button" class = "btn btn-secondary" onclick= "deleteRow(this) ; deleterow(${key})"; > Delete </a>`;
+        newCell5.innerHTML = `<a id="btn" name="btn" type = "button" class = "btn btn-light" onclick= "deleteRow(this) ; deleterow(${key})"; > Delete </a>`;
         localStorage.setItem('key', key);
 
 
