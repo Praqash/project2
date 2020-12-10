@@ -1,20 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
+
+  
 <head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>letsChat</title>
 </head>
+<style>
+  .textarea {
+  min-height: 48px;
+  min-width: 200px;
+ 
+  
+}
+
+
+
+#bt {
+border-radius: 0px;
+}
+</style>
 <body>
-  <h1 id ="noMsg" style='color: rgb(212, 216, 213);font-size: 30px;'>No message yet..</h1>
-<h2 id ="messages" style='color: rgb(12, 102, 42);font-size: 30px;'></h2>
+  <h1 id ="noMsg" style='color: rgb(224, 238, 229);font-size: 30px;'>No message yet..</h1>
+<h2 id ="messages" style='color: rgb(34, 146, 53);font-size: 30px;'></h2>
   
 
 
 <form id="message_input_form">
-    <input type="text" id="message_input" placeholder="Text...">
-    <button type="submit">Send</button>
+    <input class="textarea" type="textarea" id="message_input" placeholder="Text...">
+    <button id = "bt" class = "btn btn-outline-success btn-lg" type="submit">Send</button>
 </form>
 </body>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 <script>
              var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
@@ -32,19 +53,24 @@
             e.preventDefault();
             let message = message_input.value.trim();
             if (message.length) {
+                document.getElementById('noMsg').style.display= 'None'
                 socket.emit('send_message', {
                     username: "{{ current_user.username }}",
                     room: "{{ room }}",
                     message: message
-                   
+                    
                   
                 })
-            }
+            
+                
+              }
             message_input.value = '';
             message_input.focus();
-            document.getElementById('noMsg').style.display= 'None'
+            
         }
-    });
+        
+    
+      });
 
     window.onbeforeunload = function () {
         socket.emit('leave_room', {
