@@ -31,7 +31,7 @@
 
 
     <div class="input-group mb-3">
-        <input type="text" class="form-control" id="addFriend" placeholder="Friends Name" aria-label="Friends Name" aria-describedby="button-addon2">
+        <input type="text" class="form-control" id="addFriend" placeholder="Add a new friends" aria-label="Friends Name" aria-describedby="button-addon2">
         <div class="input-group-append">
           <button  class="btn btn-secondary btn-lg py-0" type="button" id="button-addon2"><svg width="1.8em" height="1.8em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -43,7 +43,9 @@
       
 
     <div>
-      <span>Name:</span> <select  type="text" id = "n" name="item-name"  placeholder="Person's name?">
+      <span>Name:</span> <select  type="text" id = "n" name="item-name">
+        <option value="" selected disabled hidden> 
+          Select Name 
         <option>Andy</option>
         <option>Mandy</option>
         <option>Sandy</option>
@@ -117,7 +119,7 @@
   
   
   
-  <input type="text" id="myInput" onkeyup="filterByName()" placeholder="Filter by names.." title="Type in a name">
+  <input type="text" id="myInput" onkeyup="filterByName()" placeholder="Filter by name..." title="Type in a name">
   
   <table  id="tasks">
     <tr >
