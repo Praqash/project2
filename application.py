@@ -1,9 +1,10 @@
 import os
 
-
+from flask import Flask, render_template, request, redirect, url_for
+from flask_socketio import SocketIO, join_room, leave_room
 from flask import Flask, jsonify, render_template, request, url_for, flash, session, redirect
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, login_user, UserMixin, login_required
+from flask_login import LoginManager, login_user, UserMixin, login_required, current_user
 import requests
 from flask_session import Session
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -87,16 +88,38 @@ def post_user():
     return render_template('login.html')
 
 
-@ app.route("/chat", methods=['GET', 'POST'])
+@app.route('/chat')
 @login_required
 def chat():
-    return render_template("chat.html")
+    if current_user.is_authenticated:
+        return render_template('chat.html', username={current_user.username})
+
+    else:
+        return render_template('login.html')
 
 
-@ socketio.on("submit")
-def vote(x):
+@socketio.on('send_message')
+def handle_send_message_event(data):
+    app.logger.info("{} has sent message to the room {}: {}".format(data['username'],
+                                                                    data['room'],
+                                                                    data['message']))
+    socketio.emit('receive_message', data, room=data['room'])
 
-    emit("announce vote", x, broadcast=True)
+
+@socketio.on('join_room')
+def handle_join_room_event(data):
+    app.logger.info("{} has joined the room {}".format(
+        data['username'], data['room']))
+    join_room(data['room'])
+    socketio.emit('join_room_announcement', data, room=data['room'])
+
+
+@socketio.on('leave_room')
+def handle_leave_room_event(data):
+    app.logger.info("{} has left the room {}".format(
+        data['username'], data['room']))
+    leave_room(data['room'])
+    socketio.emit('leave_room_announcement', data, room=data['room'])
 
 
 if __name__ == '__main__':
