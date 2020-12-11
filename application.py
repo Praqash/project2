@@ -70,7 +70,7 @@ def loginUser():
     user = User.query.filter_by(email=request.form['email']).first()
     if user:
         if ((user.password != request.form['password']) and (user.email == request.form['email'])):
-            flash("Incorrect Password", 'danger')
+            flash("Incorrect Password", 'error')
             return render_template('login.html', title='Login')
 
         else:
@@ -79,8 +79,8 @@ def loginUser():
                 return render_template('home.html')
 
     else:
+        flash("Account does not exist!", 'error')
         return render_template('register.html', title='Login')
-        flash("Email does not exist!", 'warning')
 
 
 @ app.route('/post_user', methods=['POST'])
@@ -91,7 +91,7 @@ def post_user():
     temp2 = user.query.filter_by(email=request.form['email']).first()
 
     if temp2:
-        flash("Account already exist", 'warning')
+        flash("Account already exist", 'error')
         return render_template('login.html')
     else:
         db.session.add(user)
