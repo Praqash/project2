@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_socketio import SocketIO, join_room, leave_room
 from flask import Flask, jsonify, render_template, request, url_for, flash, session, redirect
 from flask_sqlalchemy import SQLAlchemy
@@ -68,13 +68,19 @@ def logout():
 def loginUser():
 
     user = User.query.filter_by(email=request.form['email']).first()
-    if (user.password == request.form['password']):
-        login_user(user)
-        return render_template('home.html')
+    if user:
+        if ((user.password != request.form['password']) and (user.email == request.form['email'])):
+            flash("Incorrect Password", 'danger')
+            return render_template('login.html', title='Login')
+
+        else:
+            if ((user.password == request.form['password']) and (user.email == request.form['email'])):
+                login_user(user)
+                return render_template('home.html')
 
     else:
-
-        return render_template('login.html', title='Login')
+        return render_template('register.html', title='Login')
+        flash("Email does not exist!", 'warning')
 
 
 @ app.route('/post_user', methods=['POST'])
@@ -82,14 +88,21 @@ def post_user():
     user = User(request.form['username'],
                 request.form['email'], request.form['password'])
 
-    db.session.add(user)
-    db.session.commit()
+    temp2 = user.query.filter_by(email=request.form['email']).first()
 
-    return render_template('login.html')
+    if temp2:
+        flash("Account already exist", 'warning')
+        return render_template('login.html')
+    else:
+        db.session.add(user)
+        db.session.commit()
+        flash('Your account has been created! You are now able to log in', 'success')
+        return redirect(url_for('login'))
+        return render_template('register.html', title='Register')
 
 
-@app.route('/chat')
-@login_required
+@ app.route('/chat')
+@ login_required
 def chat():
     if current_user.is_authenticated:
         return render_template('chat.html', username={current_user.username})
@@ -98,7 +111,7 @@ def chat():
         return render_template('login.html')
 
 
-@socketio.on('send_message')
+@ socketio.on('send_message')
 def handle_send_message_event(data):
     app.logger.info("{} has sent message to the room {}: {}".format(data['username'],
                                                                     data['room'],
@@ -106,7 +119,7 @@ def handle_send_message_event(data):
     socketio.emit('receive_message', data, room=data['room'])
 
 
-@socketio.on('join_room')
+@ socketio.on('join_room')
 def handle_join_room_event(data):
     app.logger.info("{} has joined the room {}".format(
         data['username'], data['room']))
@@ -114,7 +127,7 @@ def handle_join_room_event(data):
     socketio.emit('join_room_announcement', data, room=data['room'])
 
 
-@socketio.on('leave_room')
+@ socketio.on('leave_room')
 def handle_leave_room_event(data):
     app.logger.info("{} has left the room {}".format(
         data['username'], data['room']))

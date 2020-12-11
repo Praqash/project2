@@ -15,7 +15,22 @@
     
     
   </head>
-
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+   
+    {% for message in messages %}
+    <div  class="alert alert-success" role="alert">
+      
+    
+    
+    <li id="alert">{{ message }}</li>
+    
+  </div> 
+    
+    {% endfor %}
+    
+  {% endif %}
+{% endwith %}
 
 
 <div class="form">
