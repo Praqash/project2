@@ -4,6 +4,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+.orange {
+  border-color: #f5a432;
+  color: #f5a432;
+  background-image: linear-gradient(224deg, #f4a433 0%, #754e16 100%);
+}
 
 h1 {
   color: #f5f7fa;
@@ -13,7 +18,8 @@ h1 {
 }
 
 body {
-  background: #7450d6;
+  display: grid;
+  background: orange;
 }
 
 table {

@@ -12,6 +12,26 @@
     <title>letsChat</title>
 </head>
 <style>
+
+body {
+  display: grid;
+   grid-auto-flow: column;
+   grid-template-columns: 1fr 10px 10px 10px;
+   grid-template-rows: 1fr 10px 10px 10px;
+   grid-template-areas: 2px 2px 2px 2px;
+   
+  
+  background: #e7c505; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #e7c505, #5de944);
+  background: -moz-linear-gradient(right, #e7c505, #5de944);
+  background: -o-linear-gradient(right, #e7c505, #5de944);
+  background: linear-gradient(to left, #e7c505, #5de944);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
   .textarea {
   min-height: 48px;
   min-width: 200px;
