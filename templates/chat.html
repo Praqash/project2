@@ -12,6 +12,10 @@
     <title>letsChat</title>
 </head>
 <style>
+  ::-webkit-input-placeholder {
+   text-align: center;
+}
+
 
 body {
   display: grid;
@@ -39,6 +43,7 @@ body {
   border: 0px;
   outline: 0px;
   border-radius: 30px;
+  text-align: center;
  
   
 }
@@ -68,7 +73,7 @@ border-radius: 0px;
 
 
 <form id="message_input_form">
-    <input class="textarea" type="input" id="message_input" placeholder="Text...">
+    <input class="textarea" type="input" text-align = "center" id="message_input" placeholder="Text...">
     <button id = "bt" class = "btn btn-outline-success btn-lg" type="submit">Send</button>
 </form>
 </div>
