@@ -70,11 +70,11 @@ function deleteRow(r) {
   function Person(T0, T1, T2, T3, T4, T5, T6) {
     let from = T5
     let to = T6
-    
+    let API_KEY = '851dee04d56ce7ed56ccf2085173ac12'
     
     
     // Send a GET request to the URL
-    fetch('https://api.exchangeratesapi.io/latest?'+'base=' + from 'access_key=' + 851dee04d56ce7ed56ccf2085173ac12)
+    fetch('https://api.exchangeratesapi.io/latest?'+'base=' + from & 'access_key=' + API_KEY)
     // Put response into json form
     
     .then(response => response.json())
