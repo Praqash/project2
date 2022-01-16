@@ -74,7 +74,7 @@ function deleteRow(r) {
     
     
     // Send a GET request to the URL
-    fetch('https://api.exchangeratesapi.io/latest?'+'base=' + from & 'access_key=' + API_KEY)
+    fetch('https://api.exchangeratesapi.io/latest?'+'base=' + from '&access_key=' + API_KEY)
     // Put response into json form
     
     .then(response => response.json())
